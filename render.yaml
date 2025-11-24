@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: farmguard-crop-recommendation
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app

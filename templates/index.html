@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial_scale=1.0">
+    <title>FarmGuard – Crop Recommendation</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">🌾 FarmGuard Crop Recommendation</h1>
+
+        <form action="/predict" method="POST" class="form-box">
+
+            <!-- N, P, K -->
+            <div class="input-group">
+                <input type="number" name="N" step="any" min="0" max="140"
+                       placeholder="Nitrogen (0 - 140 kg/ha)" required>
+
+                <input type="number" name="P" step="any" min="5" max="145"
+                       placeholder="Phosphorus (5 - 145 kg/ha)" required>
+
+                <input type="number" name="K" step="any" min="5" max="205"
+                       placeholder="Potassium (5 - 205 kg/ha)" required>
+            </div>
+
+            <!-- Temperature with Units -->
+            <div class="input-group">
+                <input type="number" name="temperature" step="any"
+                       min="8.82" max="43.67"
+                       placeholder="Temperature (°C or °F)" required>
+
+                <select name="temp_unit" class="select-unit" required>
+                    <option value="C">°C</option>
+                    <option value="F">°F</option>
+                </select>
+            </div>
+
+            <!-- Humidity + pH -->
+            <div class="input-group">
+                <input type="number" name="humidity" step="any"
+                       min="14.25" max="99.98"
+                       placeholder="Humidity (14 - 99 %)" required>
+
+                <input type="number" name="ph" step="any"
+                       min="3.5" max="9.93"
+                       placeholder="pH (3.5 - 9.93)" required>
+            </div>
+
+            <!-- Rainfall -->
+            <div class="input-group">
+                <input type="number" name="rainfall" step="any"
+                       min="20.21" max="298.56"
+                       placeholder="Rainfall (20 - 298 mm)" required>
+            </div>
+
+            <button type="submit" class="btn">Predict Crop</button>
+        </form>
+
+        {% if prediction_text %}
+        <p class="result">{{ prediction_text }}</p>
+        {% endif %}
+
+    </div>
+</body>
+</html>
+
